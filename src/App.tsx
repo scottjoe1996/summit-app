@@ -1,10 +1,13 @@
 import React from 'react';
 
+import SummitAppBar from './components/app-bar';
+
 const App: React.FC = () => {
   return (
-    <div>
+    <>
+      <SummitAppBar />
       <h1>Summit App</h1>
-    </div>
+    </>
   );
 };
 
