@@ -1,32 +1,23 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import { Container } from '@mui/material';
-
-import SummitAppBar from './components/app-bar/app-bar';
 import { useAuthContext } from './providers/auth-provider/auth-context';
 import LoadingPage from './pages/loading-page';
 import ErrorPage from './pages/error-page';
 import HomePage from './pages/home-page';
+import Page from './pages/page';
 
 const App: React.FC = () => {
   const { isLoading, error } = useAuthContext();
 
-  return (
-    <>
-      <SummitAppBar title='Summit' />
-      <Container sx={{ paddingTop: 2 }}>
-        {isLoading ? (
-          <LoadingPage />
-        ) : error ? (
-          <ErrorPage />
-        ) : (
-          <Routes>
-            <Route index element={<HomePage />} />
-          </Routes>
-        )}
-      </Container>
-    </>
+  return isLoading ? (
+    <LoadingPage />
+  ) : error ? (
+    <Page title='Summit' content={<ErrorPage />} />
+  ) : (
+    <Routes>
+      <Route index element={<Page title='Summit' content={<HomePage />} />} />
+    </Routes>
   );
 };
 

@@ -11,7 +11,7 @@ interface SummitAppBarProps {
 }
 
 const SummitAppBar: React.FC<SummitAppBarProps> = ({ title }) => {
-  const { userSession, isLoading, loginWithRedirect, logout } = useAuthContext();
+  const { userSession, loginWithRedirect, logout } = useAuthContext();
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const openActionsMenu = Boolean(anchorEl);
@@ -33,25 +33,24 @@ const SummitAppBar: React.FC<SummitAppBarProps> = ({ title }) => {
       <Toolbar>
         <Grid container justifyContent='space-between' alignItems='center'>
           <Typography variant='h6'>{title}</Typography>
-          {!isLoading &&
-            (userSession.isAuthenticated ? (
-              <>
-                <IconButton color='inherit' onClick={handleProfileClick}>
-                  <AccountCircle />
-                </IconButton>
-                <ProfileActionsMenu
-                  anchorEl={anchorEl}
-                  open={openActionsMenu}
-                  userEmail={userSession.user.email}
-                  onClose={() => setAnchorEl(null)}
-                  onLogout={handleLogout}
-                />
-              </>
-            ) : (
-              <Button color='inherit' onClick={handleLogin}>
-                Sign in
-              </Button>
-            ))}
+          {userSession.isAuthenticated ? (
+            <>
+              <IconButton color='inherit' onClick={handleProfileClick}>
+                <AccountCircle />
+              </IconButton>
+              <ProfileActionsMenu
+                anchorEl={anchorEl}
+                open={openActionsMenu}
+                userEmail={userSession.user.email}
+                onClose={() => setAnchorEl(null)}
+                onLogout={handleLogout}
+              />
+            </>
+          ) : (
+            <Button color='inherit' onClick={handleLogin}>
+              Sign in
+            </Button>
+          )}
         </Grid>
       </Toolbar>
     </AppBar>
