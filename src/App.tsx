@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Container } from '@mui/material';
+import { CircularProgress, Container, Grid } from '@mui/material';
 
 import SummitAppBar from './components/app-bar/app-bar';
 import { useAuthContext } from './providers/auth-provider/auth-context';
@@ -11,13 +11,13 @@ const App: React.FC = () => {
   return (
     <>
       <SummitAppBar />
-      <Container>
+      <Container sx={{ paddingTop: 2 }}>
         {isLoading ? (
-          <h1>Loading...</h1>
+          <Grid container justifyContent='center' alignItems='center' height={400}>
+            <CircularProgress />
+          </Grid>
         ) : (
-          <>
-            <h1>Summit App</h1>
-          </>
+          <h1>Summit App</h1>
         )}
       </Container>
     </>
