@@ -7,9 +7,10 @@ import { useAuthContext } from '../../providers/auth-provider/auth-context';
 import ProfileActionsMenu from './profile-actions-menu';
 
 const SummitAppBar: React.FC = () => {
+  const { userSession, isLoading, loginWithRedirect, logout } = useAuthContext();
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const openActionsMenu = Boolean(anchorEl);
-  const { userSession, loginWithRedirect, logout } = useAuthContext();
 
   const handleProfileClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -28,24 +29,25 @@ const SummitAppBar: React.FC = () => {
       <Toolbar>
         <Grid container justifyContent='space-between' alignItems='center'>
           <Typography variant='h6'>Summit</Typography>
-          {userSession.isAuthenticated ? (
-            <>
-              <IconButton color='inherit' onClick={handleProfileClick}>
-                <AccountCircle />
-              </IconButton>
-              <ProfileActionsMenu
-                anchorEl={anchorEl}
-                open={openActionsMenu}
-                userEmail={userSession.user.email}
-                onClose={() => setAnchorEl(null)}
-                onLogout={handleLogout}
-              />
-            </>
-          ) : (
-            <Button color='inherit' onClick={handleLogin}>
-              Sign in
-            </Button>
-          )}
+          {!isLoading &&
+            (userSession.isAuthenticated ? (
+              <>
+                <IconButton color='inherit' onClick={handleProfileClick}>
+                  <AccountCircle />
+                </IconButton>
+                <ProfileActionsMenu
+                  anchorEl={anchorEl}
+                  open={openActionsMenu}
+                  userEmail={userSession.user.email}
+                  onClose={() => setAnchorEl(null)}
+                  onLogout={handleLogout}
+                />
+              </>
+            ) : (
+              <Button color='inherit' onClick={handleLogin}>
+                Sign in
+              </Button>
+            ))}
         </Grid>
       </Toolbar>
     </AppBar>
