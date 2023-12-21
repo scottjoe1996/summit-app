@@ -6,7 +6,11 @@ import { AccountCircle } from '@mui/icons-material';
 import { useAuthContext } from '../../providers/auth-provider/auth-context';
 import ProfileActionsMenu from './profile-actions-menu';
 
-const SummitAppBar: React.FC = () => {
+interface SummitAppBarProps {
+  title: string;
+}
+
+const SummitAppBar: React.FC<SummitAppBarProps> = ({ title }) => {
   const { userSession, isLoading, loginWithRedirect, logout } = useAuthContext();
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -28,7 +32,7 @@ const SummitAppBar: React.FC = () => {
     <AppBar position='sticky'>
       <Toolbar>
         <Grid container justifyContent='space-between' alignItems='center'>
-          <Typography variant='h6'>Summit</Typography>
+          <Typography variant='h6'>{title}</Typography>
           {!isLoading &&
             (userSession.isAuthenticated ? (
               <>

@@ -14,7 +14,7 @@ const App: React.FC = () => {
 
   return (
     <>
-      <SummitAppBar />
+      <SummitAppBar title='Summit' />
       <Container sx={{ paddingTop: 2 }}>
         {isLoading ? (
           <LoadingPage />
