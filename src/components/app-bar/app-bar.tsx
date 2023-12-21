@@ -4,13 +4,24 @@ import { AppBar, Button, Grid, IconButton, Toolbar, Typography } from '@mui/mate
 import { AccountCircle } from '@mui/icons-material';
 
 import { useAuthContext } from '../../providers/auth-provider/auth-context';
+import ProfileActionsMenu from './profile-actions-menu';
 
 const SummitAppBar: React.FC = () => {
-  const { userSession, loginWithRedirect } = useAuthContext();
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const openActionsMenu = Boolean(anchorEl);
+  const { userSession, loginWithRedirect, logout } = useAuthContext();
+
+  const handleProfileClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
 
   const handleLogin = React.useCallback(() => {
     void loginWithRedirect();
   }, [loginWithRedirect]);
+
+  const handleLogout = React.useCallback(() => {
+    void logout();
+  }, [logout]);
 
   return (
     <AppBar position='sticky'>
@@ -18,9 +29,18 @@ const SummitAppBar: React.FC = () => {
         <Grid container justifyContent='space-between' alignItems='center'>
           <Typography variant='h6'>Summit</Typography>
           {userSession.isAuthenticated ? (
-            <IconButton color='inherit'>
-              <AccountCircle />
-            </IconButton>
+            <>
+              <IconButton color='inherit' onClick={handleProfileClick}>
+                <AccountCircle />
+              </IconButton>
+              <ProfileActionsMenu
+                anchorEl={anchorEl}
+                open={openActionsMenu}
+                userEmail={userSession.user.email}
+                onClose={() => setAnchorEl(null)}
+                onLogout={handleLogout}
+              />
+            </>
           ) : (
             <Button color='inherit' onClick={handleLogin}>
               Sign in
