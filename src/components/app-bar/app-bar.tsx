@@ -3,7 +3,7 @@ import * as React from 'react';
 import { AppBar, Button, Grid, IconButton, Toolbar, Typography } from '@mui/material';
 import { AccountCircle } from '@mui/icons-material';
 
-import { useAuthContext } from '../providers/auth-provider/auth-context';
+import { useAuthContext } from '../../providers/auth-provider/auth-context';
 
 const SummitAppBar: React.FC = () => {
   const { userSession, loginWithRedirect } = useAuthContext();

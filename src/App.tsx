@@ -1,6 +1,6 @@
 import React from 'react';
 
-import SummitAppBar from './components/app-bar';
+import SummitAppBar from './components/app-bar/app-bar';
 import { useAuthContext } from './providers/auth-provider/auth-context';
 
 const App: React.FC = () => {
