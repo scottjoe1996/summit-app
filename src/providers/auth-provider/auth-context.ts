@@ -1,6 +1,6 @@
 import { useAuth0 } from '@auth0/auth0-react';
 
-type UserSession = { user: User; isAuthenticated: true } | { isAuthenticated: false };
+export type UserSession = { user: User; isAuthenticated: true } | { isAuthenticated: false };
 
 interface AuthContext {
   userSession: UserSession;
