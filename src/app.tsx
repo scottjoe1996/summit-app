@@ -8,6 +8,7 @@ import LoadingPage from './pages/loading-page';
 import ErrorPage from './pages/error-page';
 import HomePage from './pages/home-page';
 import SchoolsPage from './pages/schools-page';
+import NotFoundPage from './pages/not-found-page';
 
 const App: React.FC = () => {
   const { isLoading, error } = useAuthContext();
@@ -27,6 +28,7 @@ const App: React.FC = () => {
           </ProtectedRoute>
         }
       />
+      <Route path='*' element={<Page title='Summit' content={<NotFoundPage />} />} />
     </Routes>
   );
 };
