@@ -36,9 +36,12 @@ const NavigationButton: React.FC = () => {
   );
 
   const links = getAvailableLinks(userSession);
+  const currentPath = window.location.pathname;
 
   return links.length === 0 ? (
-    <Terrain sx={{ margin: 1 }} />
+    <IconButton color='inherit' onClick={() => handleLinkClick('/')}>
+      <Terrain />
+    </IconButton>
   ) : (
     <>
       <IconButton color='inherit' onClick={() => setOpen(true)}>
@@ -47,7 +50,7 @@ const NavigationButton: React.FC = () => {
       <Drawer anchor='left' open={open} onClose={() => setOpen(false)}>
         <List sx={{ width: 240 }}>
           <ListItem disablePadding>
-            <ListItemButton onClick={() => handleLinkClick('/')}>
+            <ListItemButton onClick={() => handleLinkClick('/')} selected={currentPath === '/'}>
               <ListItemIcon>
                 <Map />
               </ListItemIcon>
@@ -59,7 +62,7 @@ const NavigationButton: React.FC = () => {
         <List sx={{ width: 240 }}>
           {links.map((link, index) => (
             <ListItem key={index} disablePadding>
-              <ListItemButton onClick={() => handleLinkClick(link.path)}>
+              <ListItemButton onClick={() => handleLinkClick(link.path)} selected={currentPath === link.path}>
                 <ListItemIcon>{link.icon}</ListItemIcon>
                 <ListItemText primary={link.label} />
               </ListItemButton>
