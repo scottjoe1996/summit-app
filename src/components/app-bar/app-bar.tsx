@@ -3,6 +3,7 @@ import * as React from 'react';
 import { AppBar, Grid, Toolbar, Typography } from '@mui/material';
 
 import ProfileButton from './profile-button';
+import NavigationButton from './navigation-button';
 
 interface SummitAppBarProps {
   title: string;
@@ -13,7 +14,12 @@ const SummitAppBar: React.FC<SummitAppBarProps> = ({ title }) => {
     <AppBar position='sticky'>
       <Toolbar>
         <Grid container justifyContent='space-between' alignItems='center'>
-          <Typography variant='h6'>{title}</Typography>
+          <Grid container item xs={3} alignItems='center'>
+            <NavigationButton />
+            <Typography variant='h6' marginLeft={1}>
+              {title}
+            </Typography>
+          </Grid>
           <ProfileButton />
         </Grid>
       </Toolbar>
