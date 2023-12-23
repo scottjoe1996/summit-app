@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
-import { Groups3, Map, Menu, Terrain } from '@mui/icons-material';
+import { Groups3, Menu, Terrain } from '@mui/icons-material';
 
 import { UserSession, useAuthContext } from '../../providers/auth-provider/auth-context';
 
@@ -52,9 +52,9 @@ const NavigationButton: React.FC = () => {
           <ListItem disablePadding>
             <ListItemButton onClick={() => handleLinkClick('/')} selected={currentPath === '/'}>
               <ListItemIcon>
-                <Map />
+                <Terrain />
               </ListItemIcon>
-              <ListItemText primary={'Roadmap'} />
+              <ListItemText primary={'Home'} />
             </ListItemButton>
           </ListItem>
         </List>
