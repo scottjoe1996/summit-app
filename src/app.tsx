@@ -7,7 +7,7 @@ import Page from './pages/page';
 import LoadingPage from './pages/loading-page';
 import ErrorPage from './pages/error-page';
 import HomePage from './pages/home-page';
-import SchoolsPage from './pages/schools-page';
+import SchoolsPage from './pages/schools/schools-page';
 import NotFoundPage from './pages/not-found-page';
 
 const App: React.FC = () => {
