@@ -1,4 +1,4 @@
-interface School {
+export interface School {
   id: string;
   name: string;
   totalPlayers: number;

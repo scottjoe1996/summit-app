@@ -1,9 +1,21 @@
 import React from 'react';
 
-import { Typography } from '@mui/material';
+import { School, SchoolsApi } from '../../apis/schools-api';
+
+import SchoolsTable from './schools-table';
+
+const schoolsApi = new SchoolsApi();
 
 const SchoolsPage: React.FC = () => {
-  return <Typography variant='h2'>Schools</Typography>;
+  const [schools, setSchools] = React.useState<School[]>([]);
+
+  React.useEffect(() => {
+    void schoolsApi.getSchools().then((schools) => {
+      setSchools(schools);
+    });
+  }, []);
+
+  return <SchoolsTable schools={schools} />;
 };
 
 export default SchoolsPage;
