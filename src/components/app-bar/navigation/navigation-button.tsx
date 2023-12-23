@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import { Groups3, Menu, Terrain } from '@mui/icons-material';
 
-import { UserSession, useAuthContext } from '../../providers/auth-provider/auth-context';
+import { UserSession, useAuthContext } from '../../../providers/auth-provider/auth-context';
 
 interface DrawerLink {
   icon: React.ReactElement;

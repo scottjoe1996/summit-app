@@ -3,7 +3,7 @@ import * as React from 'react';
 import { AppBar, Grid, Toolbar, Typography } from '@mui/material';
 
 import ProfileButton from './profile-button';
-import NavigationButton from './navigation-button';
+import NavigationButton from './navigation/navigation-button';
 
 interface SummitAppBarProps {
   title: string;
