@@ -11,15 +11,16 @@ export interface DrawerLink {
 
 interface DrawerLinksProps {
   links: DrawerLink[];
+  width: number;
   onLinkClick: (path: string) => void;
 }
 
-const DrawerLinks: React.FC<DrawerLinksProps> = ({ links, onLinkClick }) => {
+const DrawerLinks: React.FC<DrawerLinksProps> = ({ links, width, onLinkClick }) => {
   const currentPath = window.location.pathname;
 
   return (
     <>
-      <List sx={{ width: 240 }}>
+      <List sx={{ width }}>
         <ListItem disablePadding>
           <ListItemButton onClick={() => onLinkClick('/')} selected={currentPath === '/'}>
             <ListItemIcon>
@@ -30,7 +31,7 @@ const DrawerLinks: React.FC<DrawerLinksProps> = ({ links, onLinkClick }) => {
         </ListItem>
       </List>
       <Divider />
-      <List sx={{ width: 240 }}>
+      <List sx={{ width }}>
         {links.map((link, index) => (
           <ListItem key={index} disablePadding>
             <ListItemButton onClick={() => onLinkClick(link.path)} selected={currentPath === link.path}>
