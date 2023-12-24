@@ -10,7 +10,16 @@ const roadmapContentFormatting = { py: '12px', px: 2, minimumHeight: 200 };
 const HomePage: React.FC = () => {
   return (
     <>
-      <Typography variant='h2'>Roadmap</Typography>
+      <Typography variant='h2'>What is Summit?</Typography>
+      <Typography
+        paddingTop={1}
+      >{`Summit's mission is to revolutionise the poker experience by offering an all-encompassing platform that simplifies game tracking and fosters a collaborative community-driven approach to continually enhance and tailor features according to user preferences.`}</Typography>
+      <br />
+      <Typography paddingBottom={1}>
+        Our goal is to elevate the poker playing experience to new heights, making Summit the go-to application for poker enthusiasts seeking innovation and
+        convenience.
+      </Typography>
+      <Typography variant='h3'>Roadmap</Typography>
       <Timeline position='alternate'>
         <TimelineItem>
           <TimelineSeparator>
