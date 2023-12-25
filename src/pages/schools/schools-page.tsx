@@ -15,7 +15,7 @@ const SchoolsPage: React.FC = () => {
     setLoading(true);
     setHasError(false);
 
-    return schoolsApi.getSchools().then((result) => {
+    void schoolsApi.getSchools().then((result) => {
       setLoading(false);
 
       if (result.hasError) {
@@ -28,7 +28,7 @@ const SchoolsPage: React.FC = () => {
   }, []);
 
   React.useEffect(() => {
-    void fetchSchools();
+    fetchSchools();
   }, [fetchSchools]);
 
   return <SchoolsTable schools={schools} loading={loading} hasError={hasError} onRetry={fetchSchools} />;
