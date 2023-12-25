@@ -14,14 +14,19 @@ import { CircularProgress, Grid, Typography } from '@mui/material';
 interface SchoolsTableProps {
   schools: School[];
   loading: boolean;
+  hasError: boolean;
 }
 
-const SchoolsTable: React.FC<SchoolsTableProps> = ({ schools, loading }) => {
+const SchoolsTable: React.FC<SchoolsTableProps> = ({ schools, loading, hasError }) => {
   return (
     <TableContainer component={Paper}>
       {loading ? (
         <Grid container justifyContent='center' padding={20}>
           <CircularProgress />
+        </Grid>
+      ) : hasError ? (
+        <Grid container justifyContent='center' padding={20}>
+          <Typography>Failed to fetch schools.</Typography>
         </Grid>
       ) : schools.length === 0 ? (
         <Grid container justifyContent='center' padding={20}>
