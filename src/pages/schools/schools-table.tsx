@@ -9,7 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
 import { School } from '../../apis/schools-api';
-import { CircularProgress, Grid } from '@mui/material';
+import { CircularProgress, Grid, Typography } from '@mui/material';
 
 interface SchoolsTableProps {
   schools: School[];
@@ -22,6 +22,12 @@ const SchoolsTable: React.FC<SchoolsTableProps> = ({ schools, loading }) => {
       {loading ? (
         <Grid container justifyContent='center' padding={20}>
           <CircularProgress />
+        </Grid>
+      ) : schools.length === 0 ? (
+        <Grid container justifyContent='center' padding={20}>
+          <Typography variant='overline' color='GrayText'>
+            You are not a member of any Schools
+          </Typography>
         </Grid>
       ) : (
         <Table>
