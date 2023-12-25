@@ -11,8 +11,11 @@ const SchoolsPage: React.FC = () => {
   const [hasError, setHasError] = React.useState(false);
   const [schools, setSchools] = React.useState<School[]>([]);
 
-  React.useEffect(() => {
-    void schoolsApi.getSchools().then((result) => {
+  const fetchSchools = React.useCallback(() => {
+    setLoading(true);
+    setHasError(false);
+
+    return schoolsApi.getSchools().then((result) => {
       setLoading(false);
 
       if (result.hasError) {
@@ -24,7 +27,11 @@ const SchoolsPage: React.FC = () => {
     });
   }, []);
 
-  return <SchoolsTable schools={schools} loading={loading} hasError={hasError} />;
+  React.useEffect(() => {
+    void fetchSchools();
+  }, [fetchSchools]);
+
+  return <SchoolsTable schools={schools} loading={loading} hasError={hasError} onRetry={fetchSchools} />;
 };
 
 export default SchoolsPage;

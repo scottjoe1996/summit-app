@@ -1,35 +1,33 @@
 import React from 'react';
 
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import { CircularProgress, Grid, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 
 import { School } from '../../apis/schools-api';
-import { CircularProgress, Grid, Typography } from '@mui/material';
+import { Replay } from '@mui/icons-material';
 
 interface SchoolsTableProps {
   schools: School[];
   loading: boolean;
   hasError: boolean;
+  onRetry: () => void;
 }
 
-const SchoolsTable: React.FC<SchoolsTableProps> = ({ schools, loading, hasError }) => {
+const SchoolsTable: React.FC<SchoolsTableProps> = ({ schools, loading, hasError, onRetry }) => {
   return (
     <TableContainer component={Paper}>
       {loading ? (
-        <Grid container justifyContent='center' padding={20}>
+        <Grid container justifyContent='center' paddingTop={20} paddingBottom={20}>
           <CircularProgress />
         </Grid>
       ) : hasError ? (
-        <Grid container justifyContent='center' padding={20}>
-          <Typography>Failed to fetch schools.</Typography>
+        <Grid container justifyContent='center' alignItems='center' paddingTop={20} paddingBottom={20} direction='column'>
+          <IconButton onClick={onRetry}>
+            <Replay />
+          </IconButton>
+          <Typography color='GrayText'>Failed to fetch schools, please retry.</Typography>
         </Grid>
       ) : schools.length === 0 ? (
-        <Grid container justifyContent='center' padding={20}>
+        <Grid container justifyContent='center' paddingTop={20} paddingBottom={20}>
           <Typography variant='overline' color='GrayText'>
             You are not a member of any Schools
           </Typography>
