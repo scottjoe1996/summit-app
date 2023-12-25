@@ -7,6 +7,6 @@ export interface School {
 
 export class SchoolsApi {
   public getSchools(): Promise<School[]> {
-    return Promise.resolve([{ id: '1', name: 'Gambling Degenerates', totalPlayers: 5, totalGames: 14 }]);
+    return new Promise((result) => setTimeout(() => result([{ id: '1', name: 'Gambling Degenerates', totalPlayers: 5, totalGames: 14 }]), 500));
   }
 }

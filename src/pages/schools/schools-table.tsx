@@ -9,34 +9,42 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
 import { School } from '../../apis/schools-api';
+import { CircularProgress, Grid } from '@mui/material';
 
 interface SchoolsTableProps {
   schools: School[];
+  loading: boolean;
 }
 
-const SchoolsTable: React.FC<SchoolsTableProps> = ({ schools }) => {
+const SchoolsTable: React.FC<SchoolsTableProps> = ({ schools, loading }) => {
   return (
     <TableContainer component={Paper}>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>Name</TableCell>
-            <TableCell align='right'>Players</TableCell>
-            <TableCell align='right'>Games</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {schools.map((school) => (
-            <TableRow key={school.id}>
-              <TableCell component='th' scope='row'>
-                {school.name}
-              </TableCell>
-              <TableCell align='right'>{school.totalPlayers}</TableCell>
-              <TableCell align='right'>{school.totalGames}</TableCell>
+      {loading ? (
+        <Grid container justifyContent='center' padding={20}>
+          <CircularProgress />
+        </Grid>
+      ) : (
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Name</TableCell>
+              <TableCell align='right'>Players</TableCell>
+              <TableCell align='right'>Games</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHead>
+          <TableBody>
+            {schools.map((school) => (
+              <TableRow key={school.id}>
+                <TableCell component='th' scope='row'>
+                  {school.name}
+                </TableCell>
+                <TableCell align='right'>{school.totalPlayers}</TableCell>
+                <TableCell align='right'>{school.totalGames}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      )}
     </TableContainer>
   );
 };
