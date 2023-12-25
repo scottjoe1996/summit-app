@@ -18,7 +18,7 @@ const SummitAppBar: React.FC<SummitAppBarProps> = ({ title, links, onOpenDrawerC
     <AppBar position='sticky'>
       <Toolbar>
         <Grid container justifyContent='space-between' alignItems='center'>
-          <Grid container item xs={3} alignItems='center'>
+          <Grid container item xs={4} alignItems='center' wrap='nowrap'>
             <NavigationButton links={links} onOpenDrawerClick={onOpenDrawerClick} onLinkClick={onLinkClick} />
             <Typography variant='h6' marginLeft={1}>
               {title}
