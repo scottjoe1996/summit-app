@@ -1,10 +1,11 @@
 import React from 'react';
 
-import { Button, Dialog, DialogTitle, Grid } from '@mui/material';
+import { Button, Grid } from '@mui/material';
 
 import { School, SchoolsApi } from '../../apis/schools-api';
 
 import SchoolsTable from './schools-table';
+import CreateSchoolDialog from './create-school-dialog';
 
 const schoolsApi = new SchoolsApi();
 
@@ -44,10 +45,7 @@ const SchoolsPage: React.FC = () => {
         </Grid>
       )}
       <SchoolsTable schools={schools} loading={loading} hasError={hasError} onRetry={fetchSchools} />
-      <Dialog open={openSchoolDialog} onClose={() => setOpenSchoolDialog(false)}>
-        <DialogTitle>Create school</DialogTitle>
-        {/* TODO */}
-      </Dialog>
+      <CreateSchoolDialog open={openSchoolDialog} onClose={() => setOpenSchoolDialog(false)} />
     </>
   );
 };
