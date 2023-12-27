@@ -6,7 +6,7 @@ import { School, SchoolsApi } from '../../apis/schools-api';
 import { User } from '../../providers/auth-provider/auth-context';
 
 import SchoolsTable from './schools-table';
-import CreateSchoolDialog from './create-school-dialog';
+import CreateSchoolDialog from './create-school-dialog/create-school-dialog';
 
 const schoolsApi = new SchoolsApi();
 
