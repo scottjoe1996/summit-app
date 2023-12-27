@@ -1,10 +1,11 @@
 import React from 'react';
 
-import { Link, Typography } from '@mui/material';
+import { Hidden, Link, Typography } from '@mui/material';
 import { LineAxis, CameraEnhance, Feedback } from '@mui/icons-material';
 import { deepOrange, purple, teal } from '@mui/material/colors';
 
 import Roadmap, { RoadmapItem } from './roadmap';
+import RoadmapCard from './roadmap-card';
 
 const roadmapItems: RoadmapItem[] = [
   {
@@ -50,7 +51,14 @@ const HomePage: React.FC = () => {
         convenience.
       </Typography>
       <Typography variant='h3'>Roadmap</Typography>
-      <Roadmap items={roadmapItems} />
+      <Hidden smDown>
+        <Roadmap items={roadmapItems} />
+      </Hidden>
+      <Hidden smUp>
+        {roadmapItems.map((item, index) => (
+          <RoadmapCard key={index} content={item} />
+        ))}
+      </Hidden>
     </>
   );
 };
