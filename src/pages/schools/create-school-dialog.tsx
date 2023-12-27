@@ -1,15 +1,17 @@
 import React from 'react';
 
-import { Dialog, DialogContent, DialogTitle, TextField } from '@mui/material';
+import { Dialog, DialogContent, DialogContentText, DialogTitle, Divider, Paper, Stack, TextField } from '@mui/material';
+import { grey } from '@mui/material/colors';
 
 import { NO_ERROR, hasError } from './form-utils';
 
 interface CreateSchoolDialogProps {
+  creatingUserEmail: string;
   open: boolean;
   onClose: () => void;
 }
 
-const CreateSchoolDialog: React.FC<CreateSchoolDialogProps> = ({ open, onClose }) => {
+const CreateSchoolDialog: React.FC<CreateSchoolDialogProps> = ({ creatingUserEmail, open, onClose }) => {
   const [name, setName] = React.useState('');
   const [nameError, setNameError] = React.useState(NO_ERROR);
 
@@ -32,8 +34,17 @@ const CreateSchoolDialog: React.FC<CreateSchoolDialogProps> = ({ open, onClose }
           variant='filled'
           error={hasError(nameError)}
         />
+        <Divider />
+        <DialogContentText marginTop={2} marginBottom={1}>
+          Admin
+        </DialogContentText>
+        <Stack direction='row'>
+          <Paper sx={{ flexGrow: 1, padding: 1, textAlign: 'center', backgroundColor: grey[200], color: 'GrayText' }} elevation={0}>
+            {creatingUserEmail}
+          </Paper>
+        </Stack>
       </DialogContent>
-      {/* TODO: Add admin, Add players (with validation), create button (with error handling)*/}
+      {/* TODO: Add players (with validation), create button (with error handling)*/}
     </Dialog>
   );
 };

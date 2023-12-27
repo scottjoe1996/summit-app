@@ -3,13 +3,18 @@ import React from 'react';
 import { Button, Grid } from '@mui/material';
 
 import { School, SchoolsApi } from '../../apis/schools-api';
+import { User } from '../../providers/auth-provider/auth-context';
 
 import SchoolsTable from './schools-table';
 import CreateSchoolDialog from './create-school-dialog';
 
 const schoolsApi = new SchoolsApi();
 
-const SchoolsPage: React.FC = () => {
+interface SchoolsPageProps {
+  user: User;
+}
+
+const SchoolsPage: React.FC<SchoolsPageProps> = ({ user }) => {
   const [openSchoolDialog, setOpenSchoolDialog] = React.useState(false);
   const [loading, setLoading] = React.useState(true);
   const [hasError, setHasError] = React.useState(false);
@@ -45,7 +50,7 @@ const SchoolsPage: React.FC = () => {
         </Grid>
       )}
       <SchoolsTable schools={schools} loading={loading} hasError={hasError} onRetry={fetchSchools} />
-      <CreateSchoolDialog open={openSchoolDialog} onClose={() => setOpenSchoolDialog(false)} />
+      <CreateSchoolDialog creatingUserEmail={user.email} open={openSchoolDialog} onClose={() => setOpenSchoolDialog(false)} />
     </>
   );
 };

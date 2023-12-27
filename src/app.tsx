@@ -20,14 +20,7 @@ const App: React.FC = () => {
   ) : (
     <Routes>
       <Route index element={<Page title='Summit' content={<HomePage />} />} />
-      <Route
-        path='/schools'
-        element={
-          <ProtectedRoute>
-            <Page title='Schools' content={<SchoolsPage />} />
-          </ProtectedRoute>
-        }
-      />
+      <Route path='/schools' element={<ProtectedRoute page={(user) => <Page title='Schools' content={<SchoolsPage user={user} />} />} />} />
       <Route path='*' element={<Page title='Summit' content={<NotFoundPage />} />} />
     </Routes>
   );

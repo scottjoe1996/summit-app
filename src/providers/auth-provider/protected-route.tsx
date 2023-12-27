@@ -1,18 +1,18 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 
-import { useAuthContext } from './auth-context';
+import { User, useAuthContext } from './auth-context';
 
 interface ProtectedRouteProps {
-  children: React.ReactElement;
+  page: (user: User) => React.ReactElement;
 }
 
-export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
+export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ page }) => {
   const { userSession } = useAuthContext();
 
   if (!userSession.isAuthenticated) {
     return <Navigate to='/' />;
   }
 
-  return children;
+  return page(userSession.user);
 };
