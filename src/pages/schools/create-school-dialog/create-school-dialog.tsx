@@ -39,6 +39,15 @@ const CreateSchoolDialog: React.FC<CreateSchoolDialogProps> = ({ creatingUserEma
     setNameError(NO_ERROR);
   }, []);
 
+  const handleRemovePlayer = React.useCallback((playerToRemove: string) => {
+    setTotalPlayers((oldPlayers) => {
+      const newPlayers = [...oldPlayers];
+      newPlayers.splice(oldPlayers.indexOf(playerToRemove), 1);
+
+      return newPlayers;
+    });
+  }, []);
+
   const cannotAddPlayer = hasError(playerEmailError);
 
   return (
@@ -66,7 +75,7 @@ const CreateSchoolDialog: React.FC<CreateSchoolDialogProps> = ({ creatingUserEma
         </DialogContentText>
         <Stack direction='column' marginBottom={1} spacing={1}>
           {totalPlayers.map((playerEmail, index) => (
-            <PlayerTile key={index} email={playerEmail} />
+            <PlayerTile key={index} email={playerEmail} onRemove={() => handleRemovePlayer(playerEmail)} />
           ))}
         </Stack>
         <Grid container alignItems='center'>
