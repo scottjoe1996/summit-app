@@ -7,6 +7,7 @@ export interface School {
 
 export type ApiResponse<T> = { hasError: true } | { hasError: false; data: T };
 
+// TODO: implement real schools api
 export class SchoolsApi {
   public getSchools(): Promise<ApiResponse<School[]>> {
     return new Promise((result) =>
@@ -14,8 +15,8 @@ export class SchoolsApi {
     );
   }
 
-  public createSchool(name: string, admin: string, players: string[]): Promise<ApiResponse<string>> {
-    console.log(name, admin, players);
+  public createSchool(name: string, organiser: string, players: string[]): Promise<ApiResponse<string>> {
+    console.log(name, organiser, players);
     return new Promise((result) => setTimeout(() => result({ hasError: false, data: '2' }), 500));
   }
 }
