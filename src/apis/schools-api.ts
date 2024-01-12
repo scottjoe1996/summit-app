@@ -13,4 +13,9 @@ export class SchoolsApi {
       setTimeout(() => result({ hasError: false, data: [{ id: '1', name: 'Gambling Degenerates', totalPlayers: 5, totalGames: 14 }] }), 500)
     );
   }
+
+  public createSchool(name: string, admin: string, players: string[]): Promise<ApiResponse<string>> {
+    console.log(name, admin, players);
+    return new Promise((result) => setTimeout(() => result({ hasError: false, data: '2' }), 500));
+  }
 }
