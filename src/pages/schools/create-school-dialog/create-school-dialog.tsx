@@ -1,8 +1,9 @@
 import React from 'react';
 import { validate } from 'email-validator';
 
-import { Dialog, DialogContent, DialogContentText, DialogTitle, Grid, IconButton, Stack, TextField } from '@mui/material';
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, IconButton, Stack, TextField } from '@mui/material';
 import { Add } from '@mui/icons-material';
+import { LoadingButton } from '@mui/lab';
 
 import { NO_ERROR, hasError } from './form-utils';
 import PlayerTile from './player-tile';
@@ -49,6 +50,7 @@ const CreateSchoolDialog: React.FC<CreateSchoolDialogProps> = ({ creatingUserEma
   }, []);
 
   const cannotAddPlayer = hasError(playerEmailError);
+  const schoolNameHasError = hasError(nameError);
 
   return (
     <Dialog open={open} onClose={onClose} fullWidth>
@@ -98,7 +100,12 @@ const CreateSchoolDialog: React.FC<CreateSchoolDialogProps> = ({ creatingUserEma
           </Grid>
         </Grid>
       </DialogContent>
-      {/* TODO: Add player validation (check user exists), create button (with error handling)*/}
+      <DialogActions sx={{ padding: 3 }}>
+        <LoadingButton disabled={name === '' || schoolNameHasError} variant='contained'>
+          Create
+        </LoadingButton>
+      </DialogActions>
+      {/* TODO: with error handling*/}
     </Dialog>
   );
 };
