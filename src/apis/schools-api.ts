@@ -5,7 +5,7 @@ export interface School {
   totalGames: number;
 }
 
-type ApiResponse<T> = { hasError: true } | { hasError: false; data: T };
+export type ApiResponse<T> = { hasError: true } | { hasError: false; data: T };
 
 export class SchoolsApi {
   public getSchools(): Promise<ApiResponse<School[]>> {

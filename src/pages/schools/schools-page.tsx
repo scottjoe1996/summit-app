@@ -36,6 +36,11 @@ const SchoolsPage: React.FC<SchoolsPageProps> = ({ user }) => {
     });
   }, []);
 
+  const handleSchoolCreated = React.useCallback(() => {
+    setOpenSchoolDialog(false);
+    void fetchSchools();
+  }, [fetchSchools]);
+
   React.useEffect(() => {
     fetchSchools();
   }, [fetchSchools]);
@@ -50,7 +55,13 @@ const SchoolsPage: React.FC<SchoolsPageProps> = ({ user }) => {
         </Grid>
       )}
       <SchoolsTable schools={schools} loading={loading} hasError={hasError} onRetry={fetchSchools} />
-      <CreateSchoolDialog creatingUserEmail={user.email} open={openSchoolDialog} onClose={() => setOpenSchoolDialog(false)} />
+      <CreateSchoolDialog
+        creatingUserEmail={user.email}
+        open={openSchoolDialog}
+        createSchool={(name, admin, players) => schoolsApi.createSchool(name, admin, players)}
+        onClose={() => setOpenSchoolDialog(false)}
+        onSchoolCreatedSuccessfully={handleSchoolCreated}
+      />
     </>
   );
 };

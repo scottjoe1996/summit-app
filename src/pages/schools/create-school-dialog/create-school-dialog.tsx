@@ -5,6 +5,8 @@ import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, G
 import { Add } from '@mui/icons-material';
 import { LoadingButton } from '@mui/lab';
 
+import { ApiResponse } from '../../../apis/schools-api';
+
 import { NO_ERROR, hasError } from './form-utils';
 import PlayerTile from './player-tile';
 
@@ -12,14 +14,17 @@ interface CreateSchoolDialogProps {
   creatingUserEmail: string;
   open: boolean;
   onClose: () => void;
+  onSchoolCreatedSuccessfully: () => void;
+  createSchool: (name: string, admin: string, players: string[]) => Promise<ApiResponse<string>>;
 }
 
-const CreateSchoolDialog: React.FC<CreateSchoolDialogProps> = ({ creatingUserEmail, open, onClose }) => {
+const CreateSchoolDialog: React.FC<CreateSchoolDialogProps> = ({ creatingUserEmail, open, onClose, onSchoolCreatedSuccessfully, createSchool }) => {
   const [totalPlayers, setTotalPlayers] = React.useState<string[]>([]);
   const [playerEmail, setPlayerEmail] = React.useState('');
   const [playerEmailError, setPlayerEmailError] = React.useState(NO_ERROR);
   const [name, setName] = React.useState('');
   const [nameError, setNameError] = React.useState(NO_ERROR);
+  const [creatingSchool, setCreatingSchool] = React.useState(false);
 
   const handleSchoolNameChange = React.useCallback((event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setNameError(getNameError(event.target.value));
@@ -48,6 +53,19 @@ const CreateSchoolDialog: React.FC<CreateSchoolDialogProps> = ({ creatingUserEma
       return newPlayers;
     });
   }, []);
+
+  const handleCreateSchool = React.useCallback(() => {
+    setCreatingSchool(true);
+    void createSchool(name, creatingUserEmail, totalPlayers).then((response) => {
+      setCreatingSchool(false);
+
+      if (response.hasError) {
+        // TODO: error handling
+      }
+
+      onSchoolCreatedSuccessfully();
+    });
+  }, [createSchool, creatingUserEmail, name, onSchoolCreatedSuccessfully, totalPlayers]);
 
   const cannotAddPlayer = hasError(playerEmailError);
   const schoolNameHasError = hasError(nameError);
@@ -101,7 +119,7 @@ const CreateSchoolDialog: React.FC<CreateSchoolDialogProps> = ({ creatingUserEma
         </Grid>
       </DialogContent>
       <DialogActions sx={{ padding: 3 }}>
-        <LoadingButton disabled={name === '' || schoolNameHasError} variant='contained'>
+        <LoadingButton disabled={name === '' || schoolNameHasError} loading={creatingSchool} variant='contained' onClick={handleCreateSchool}>
           Create
         </LoadingButton>
       </DialogActions>
