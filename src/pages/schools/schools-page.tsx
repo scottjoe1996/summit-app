@@ -55,13 +55,14 @@ const SchoolsPage: React.FC<SchoolsPageProps> = ({ user }) => {
         </Grid>
       )}
       <SchoolsTable schools={schools} loading={loading} hasError={hasError} onRetry={fetchSchools} />
-      <CreateSchoolDialog
-        creatingUserEmail={user.email}
-        open={openSchoolDialog}
-        createSchool={(name, admin, players) => schoolsApi.createSchool(name, admin, players)}
-        onClose={() => setOpenSchoolDialog(false)}
-        onSchoolCreatedSuccessfully={handleSchoolCreated}
-      />
+      {openSchoolDialog && (
+        <CreateSchoolDialog
+          creatingUserEmail={user.email}
+          createSchool={(name, admin, players) => schoolsApi.createSchool(name, admin, players)}
+          onClose={() => setOpenSchoolDialog(false)}
+          onSchoolCreatedSuccessfully={handleSchoolCreated}
+        />
+      )}
     </>
   );
 };

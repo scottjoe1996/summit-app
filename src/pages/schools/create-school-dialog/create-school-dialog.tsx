@@ -12,13 +12,12 @@ import PlayerTile from './player-tile';
 
 interface CreateSchoolDialogProps {
   creatingUserEmail: string;
-  open: boolean;
   onClose: () => void;
   onSchoolCreatedSuccessfully: () => void;
   createSchool: (name: string, admin: string, players: string[]) => Promise<ApiResponse<string>>;
 }
 
-const CreateSchoolDialog: React.FC<CreateSchoolDialogProps> = ({ creatingUserEmail, open, onClose, onSchoolCreatedSuccessfully, createSchool }) => {
+const CreateSchoolDialog: React.FC<CreateSchoolDialogProps> = ({ creatingUserEmail, onClose, onSchoolCreatedSuccessfully, createSchool }) => {
   const [totalPlayers, setTotalPlayers] = React.useState<string[]>([]);
   const [playerEmail, setPlayerEmail] = React.useState('');
   const [playerEmailError, setPlayerEmailError] = React.useState(NO_ERROR);
@@ -74,7 +73,7 @@ const CreateSchoolDialog: React.FC<CreateSchoolDialogProps> = ({ creatingUserEma
   const schoolNameHasError = hasError(nameError);
 
   return (
-    <Dialog open={open} onClose={onClose} fullWidth>
+    <Dialog open onClose={onClose} fullWidth>
       <DialogTitle>Create school</DialogTitle>
       {creatingSchoolError && (
         <Alert severity='error' sx={{ marginLeft: 3, marginRight: 3 }}>
