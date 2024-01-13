@@ -141,6 +141,10 @@ const CreateSchoolDialog: React.FC<CreateSchoolDialogProps> = ({ creatingUserEma
 };
 
 const getPlayerError = (playerEmail: string, totalPlayers: string[]): string => {
+  if (playerEmail === '') {
+    return NO_ERROR;
+  }
+
   if (!validate(playerEmail)) {
     return 'Player email needs to be in the correct format';
   }
