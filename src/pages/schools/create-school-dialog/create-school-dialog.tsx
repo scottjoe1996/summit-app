@@ -135,7 +135,6 @@ const CreateSchoolDialog: React.FC<CreateSchoolDialogProps> = ({ creatingUserEma
           Create
         </LoadingButton>
       </DialogActions>
-      {/* TODO: with error handling*/}
     </Dialog>
   );
 };
