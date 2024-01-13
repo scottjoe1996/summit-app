@@ -80,6 +80,7 @@ const CreateSchoolDialog: React.FC<CreateSchoolDialogProps> = ({ creatingUserEma
           fullWidth
           value={name}
           onChange={handleSchoolNameChange}
+          disabled={creatingSchool}
           helperText={nameError}
           variant='filled'
           error={hasError(nameError)}
@@ -112,7 +113,11 @@ const CreateSchoolDialog: React.FC<CreateSchoolDialogProps> = ({ creatingUserEma
             />
           </Grid>
           <Grid item>
-            <IconButton sx={{ marginLeft: 1, marginBottom: 2.5 }} onClick={() => handleAddPlayer(playerEmail)} disabled={cannotAddPlayer || playerEmail === ''}>
+            <IconButton
+              sx={{ marginLeft: 1, marginBottom: 2.5 }}
+              onClick={() => handleAddPlayer(playerEmail)}
+              disabled={cannotAddPlayer || playerEmail === '' || creatingSchool}
+            >
               <Add />
             </IconButton>
           </Grid>
