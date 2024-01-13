@@ -1,7 +1,7 @@
 import React from 'react';
 import { validate } from 'email-validator';
 
-import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, IconButton, Stack, TextField } from '@mui/material';
+import { Alert, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, IconButton, Stack, TextField } from '@mui/material';
 import { Add } from '@mui/icons-material';
 import { LoadingButton } from '@mui/lab';
 
@@ -25,6 +25,7 @@ const CreateSchoolDialog: React.FC<CreateSchoolDialogProps> = ({ creatingUserEma
   const [name, setName] = React.useState('');
   const [nameError, setNameError] = React.useState(NO_ERROR);
   const [creatingSchool, setCreatingSchool] = React.useState(false);
+  const [creatingSchoolError, setCreatingSchoolError] = React.useState(false);
 
   const handleSchoolNameChange = React.useCallback((event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setNameError(getNameError(event.target.value));
@@ -56,11 +57,13 @@ const CreateSchoolDialog: React.FC<CreateSchoolDialogProps> = ({ creatingUserEma
 
   const handleCreateSchool = React.useCallback(() => {
     setCreatingSchool(true);
+    setCreatingSchoolError(false);
     void createSchool(name, creatingUserEmail, totalPlayers).then((response) => {
       setCreatingSchool(false);
 
       if (response.hasError) {
-        // TODO: error handling
+        setCreatingSchoolError(true);
+        return;
       }
 
       onSchoolCreatedSuccessfully();
@@ -73,6 +76,11 @@ const CreateSchoolDialog: React.FC<CreateSchoolDialogProps> = ({ creatingUserEma
   return (
     <Dialog open={open} onClose={onClose} fullWidth>
       <DialogTitle>Create school</DialogTitle>
+      {creatingSchoolError && (
+        <Alert severity='error' sx={{ marginLeft: 3, marginRight: 3 }}>
+          An error occurred when creating the school, please try again.
+        </Alert>
+      )}
       <DialogContent>
         <TextField
           label='Name'
