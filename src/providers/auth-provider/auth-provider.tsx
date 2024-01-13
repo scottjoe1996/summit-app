@@ -12,6 +12,8 @@ export const AuthProvider: React.FunctionComponent<{ children: React.ReactElemen
       authorizationParams={{
         redirect_uri: window.location.origin
       }}
+      useRefreshTokens
+      cacheLocation='localstorage'
     >
       {children}
     </Auth0Provider>
