@@ -1,9 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { CircularProgress, Grid, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
+import { Button, CircularProgress, Grid, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
+import { Replay } from '@mui/icons-material';
 
 import { School } from '../../apis/schools-api';
-import { Replay } from '@mui/icons-material';
 
 interface SchoolsTableProps {
   schools: School[];
@@ -13,6 +14,15 @@ interface SchoolsTableProps {
 }
 
 const SchoolsTable: React.FC<SchoolsTableProps> = ({ schools, loading, hasError, onRetry }) => {
+  const navigate = useNavigate();
+
+  const handleViewSchoolClick = React.useCallback(
+    (id: string) => {
+      navigate(`/schools/${id}`);
+    },
+    [navigate]
+  );
+
   return (
     <TableContainer component={Paper}>
       {loading ? (
@@ -39,6 +49,7 @@ const SchoolsTable: React.FC<SchoolsTableProps> = ({ schools, loading, hasError,
               <TableCell>Name</TableCell>
               <TableCell align='right'>Players</TableCell>
               <TableCell align='right'>Games</TableCell>
+              <TableCell align='right'></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -49,6 +60,13 @@ const SchoolsTable: React.FC<SchoolsTableProps> = ({ schools, loading, hasError,
                 </TableCell>
                 <TableCell align='right'>{school.totalPlayers}</TableCell>
                 <TableCell align='right'>{school.totalGames}</TableCell>
+                <TableCell align='right'>
+                  {
+                    <Button variant='outlined' onClick={() => handleViewSchoolClick(school.id)}>
+                      View
+                    </Button>
+                  }
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
