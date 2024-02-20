@@ -34,7 +34,7 @@ const DrawerLinks: React.FC<DrawerLinksProps> = ({ links, width, onLinkClick }) 
       <List sx={{ width }}>
         {links.map((link, index) => (
           <ListItem key={index} disablePadding>
-            <ListItemButton onClick={() => onLinkClick(link.path)} selected={currentPath === link.path}>
+            <ListItemButton onClick={() => onLinkClick(link.path)} selected={currentPath.includes(link.path)}>
               <ListItemIcon>{link.icon}</ListItemIcon>
               <ListItemText primary={link.label} />
             </ListItemButton>
