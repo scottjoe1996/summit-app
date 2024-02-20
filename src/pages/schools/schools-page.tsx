@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Button, Grid } from '@mui/material';
 
-import { School, SchoolsApi } from '../../apis/schools-api';
+import { SchoolOverview, SchoolsApi } from '../../apis/schools-api';
 import { User } from '../../providers/auth-provider/auth-context';
 
 import SchoolsTable from './schools-table';
@@ -18,7 +18,7 @@ const SchoolsPage: React.FC<SchoolsPageProps> = ({ user }) => {
   const [openSchoolDialog, setOpenSchoolDialog] = React.useState(false);
   const [loading, setLoading] = React.useState(true);
   const [hasError, setHasError] = React.useState(false);
-  const [schools, setSchools] = React.useState<School[]>([]);
+  const [schools, setSchools] = React.useState<SchoolOverview[]>([]);
 
   const fetchSchools = React.useCallback(() => {
     setLoading(true);

@@ -4,10 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import { Button, CircularProgress, Grid, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 import { Replay } from '@mui/icons-material';
 
-import { School } from '../../apis/schools-api';
+import { SchoolOverview } from '../../apis/schools-api';
 
 interface SchoolsTableProps {
-  schools: School[];
+  schools: SchoolOverview[];
   loading: boolean;
   hasError: boolean;
   onRetry: () => void;
