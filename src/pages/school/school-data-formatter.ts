@@ -1,6 +1,7 @@
 import { School } from '../../apis/schools-api';
 
 interface PlayerWinningsDataPoints {
+  curve: 'linear';
   data: (number | null)[];
   label: string;
 }
@@ -31,7 +32,7 @@ export const formatSchoolGraphData = (school: Pick<School, 'games' | 'players'>)
   const playerWinningsDataPoints: PlayerWinningsDataPoints[] = [];
 
   playerToWinningsPerGameMap.forEach((dataPoints, player) => {
-    playerWinningsDataPoints.push({ label: player, data: dataPoints });
+    playerWinningsDataPoints.push({ label: player, data: dataPoints, curve: 'linear' });
   });
 
   return { dates, dataPoints: playerWinningsDataPoints };

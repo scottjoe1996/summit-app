@@ -49,12 +49,12 @@ describe('formatSchoolGraphData', () => {
 
     expect(result.dates).toEqual(['07/03/2024', '14/03/2024', '21/03/2024']);
     expect(result.dataPoints).toEqual([
-      { data: [5, 5, 0], label: 'user1@test.com' },
-      { data: [-15, -5, -5], label: 'user2@test.com' },
-      { data: [5, -5, null], label: 'user3@test.com' },
-      { data: [-5, null, 2.5], label: 'user4@test.com' },
-      { data: [5, 5, 2.5], label: 'user5@test.com' },
-      { data: [null, null, null], label: 'user6@test.com' }
+      { data: [5, 5, 0], label: 'user1@test.com', curve: 'linear' },
+      { data: [-15, -5, -5], label: 'user2@test.com', curve: 'linear' },
+      { data: [5, -5, null], label: 'user3@test.com', curve: 'linear' },
+      { data: [-5, null, 2.5], label: 'user4@test.com', curve: 'linear' },
+      { data: [5, 5, 2.5], label: 'user5@test.com', curve: 'linear' },
+      { data: [null, null, null], label: 'user6@test.com', curve: 'linear' }
     ]);
   });
 
