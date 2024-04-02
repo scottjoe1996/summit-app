@@ -55,7 +55,7 @@ export class SchoolsApi {
               games: [
                 {
                   id: '2',
-                  date: new Date(),
+                  date: new Date(2024, 2, 7),
                   playerStats: [
                     { username: 'user1@test.com', buyIn: { currency: 'GBP', amount: 5 }, cashOut: { currency: 'GBP', amount: 10 } },
                     { username: 'user2@test.com', buyIn: { currency: 'GBP', amount: 15 }, cashOut: { currency: 'GBP', amount: 0 } },
@@ -66,7 +66,7 @@ export class SchoolsApi {
                 },
                 {
                   id: '3',
-                  date: new Date(),
+                  date: new Date(2024, 2, 14),
                   playerStats: [
                     { username: 'user1@test.com', buyIn: { currency: 'GBP', amount: 10 }, cashOut: { currency: 'GBP', amount: 15 } },
                     { username: 'user2@test.com', buyIn: { currency: 'GBP', amount: 5 }, cashOut: { currency: 'GBP', amount: 0 } },
@@ -76,7 +76,7 @@ export class SchoolsApi {
                 },
                 {
                   id: '4',
-                  date: new Date(),
+                  date: new Date(2024, 2, 21),
                   playerStats: [
                     { username: 'user1@test.com', buyIn: { currency: 'GBP', amount: 5 }, cashOut: { currency: 'GBP', amount: 5 } },
                     { username: 'user2@test.com', buyIn: { currency: 'GBP', amount: 15 }, cashOut: { currency: 'GBP', amount: 10 } },
